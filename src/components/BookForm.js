@@ -4,16 +4,20 @@ import { createBook } from '../api';
 const BookForm = ({ onBookCreated }) => {
     const [title, setTitle] = useState('');
     const [author, setAuthor] = useState('');
-    const [publishedYear, setPublishedYear] = useState('');
+    const [price, setPrice] = useState('');
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await createBook({ title, author, published_year: publishedYear });
+            await createBook({ 
+                title, 
+                author, 
+                price
+            });
             onBookCreated();
             setTitle('');
             setAuthor('');
-            setPublishedYear('');
+            setPrice('');
         } catch (error) {
             console.error('Erro ao criar livro:', error);
         }
@@ -34,8 +38,8 @@ const BookForm = ({ onBookCreated }) => {
                 </label>
                 <br />
                 <label>
-                    Ano de Publicação:
-                    <input type="number" value={publishedYear} onChange={(e) => setPublishedYear(e.target.value)} required />
+                    Preço:
+                    <input type="number" value={price} onChange={(e) => setPrice(e.target.value)} required />
                 </label>
                 <br />
                 <button type="submit">Adicionar Livro</button>
